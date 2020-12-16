@@ -1,0 +1,51 @@
+<div class="row w-100">
+  <div class="col-6">
+    <h1 class="w-100 text-center">Список cущностей</h1>
+  </div>
+  <div class="col-6 row justify-content-center">
+    <button class="col btn btn-dark update-btn" (click)="updateEnts()">Update ({{this.value}} s)</button>
+    <button class="col btn btn-dark pause-btn" (click)="stopTimer()">Stop Timer</button>
+    <button class="col btn btn-dark start-btn" (click)="startTimer()">Start Timer</button>
+  </div>
+</div>
+<table class="table table-striped mt-4 m-auto w-auto">
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th *ngFor="let index of indexes">Par{{index}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let ent of ents | sortBy: 'asc':'name'">
+    <ng-template [ngTemplateOutlet]="loadTemplate(ent)"
+                 [ngTemplateOutletContext]="{ $implicit: ent}">
+    </ng-template>
+  </tr>
+  <tr>
+    <td>Итого:</td>
+    <td class="dd-td" *ngFor="let summaryTd of summary; index as i">
+      <div class="dropdown" ngbDropdown>
+        <button class="btn dropdown-toggle" type="button" id="dropdownMenu{{i}}" ngbDropdownToggle>
+          {{summaryTd | number:'1.4-4'}}
+        </button>
+        <div class="dropdown-menu" ngbDropdownMenu [attr.aria-labelledby]="'dropdownBasic' + i">
+          <button class="dropdown-item" type="button" (click)="setSummarySelect(i, 'sum')">Sum</button>
+          <button class="dropdown-item" type="button" (click)="setSummarySelect(i, 'min')">Min</button>
+          <button class="dropdown-item" type="button" (click)="setSummarySelect(i, 'max')">Max</button>
+          <button class="dropdown-item" type="button" (click)="setSummarySelect(i, 'avg')">Avg</button>
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr class="no-borders">
+    <td>selected</td>
+    <td *ngFor="let sel of summarySelected">{{sel}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #readOnlyTemplate let-ent>
+  <td>{{ent.name}}</td>
+  <td *ngFor="let in of indexes; let i = index" [style.background-color]="getBGColor(ent['par' + i])"
+      [style.color]="getColor(ent['par' + i])">{{ent['par' + i] | number:'1.4-4'}}</td>
+</ng-template>

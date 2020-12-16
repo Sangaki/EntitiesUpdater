@@ -1,0 +1,44 @@
+h1 {
+  margin: 1rem auto 2rem;
+}
+
+table, tr, th, td {
+  border: 1px solid black;
+}
+
+table {
+  border-spacing: 0;
+}
+
+td {
+  min-width: 65px;
+  text-align: right;
+  padding: 5px;
+}
+
+.no-borders {
+  border: none !important;
+  color: grey;
+}
+.no-borders td {
+  border: none !important;
+}
+
+.update-btn, .pause-btn, .start-btn {
+  margin: auto 15px !important;
+}
+
+.dd-td {
+  padding: 0 !important;
+}
+.dd-td .dropdown {
+  height: 33px;
+}
+.dd-td button {
+  padding: 0 !important;
+  text-align: center;
+  height: 33px;
+  width: 85px;
+}
+
+/*# sourceMappingURL=ents.component.css.map */
